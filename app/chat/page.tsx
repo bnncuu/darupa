@@ -230,7 +230,7 @@ export default function Chat() {
 
         {/* Chat Messages */}
         {!showWelcome && (
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 pb-24">
             <ChatMessageList>
               {messages.map((message) => (
                 <ChatBubble
@@ -258,9 +258,11 @@ export default function Chat() {
             </ChatMessageList>
           </div>
         )}
+      </div>
 
-        {/* Input Area */}
-        <div className="p-4 border rounded-lg bg-background/80 backdrop-blur-sm border-input">
+      {/* Fixed Input Area */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t">
+        <div className="max-w-4xl mx-auto p-4">
           <div className="relative">
             <AnimatePresence>
               {showCommandPalette && (

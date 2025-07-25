@@ -48,7 +48,7 @@ export function useAutoScroll(options: { smooth?: boolean; content?: React.React
   }, [handleScroll]);
 
   useEffect(() => {
-    if (autoScrollEnabled) {
+    if (autoScrollEnabled && content) {
       scrollToBottom();
     }
   }, [content, autoScrollEnabled, scrollToBottom]);
