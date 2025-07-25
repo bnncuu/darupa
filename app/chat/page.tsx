@@ -48,6 +48,12 @@ export default function Chat() {
   const [showCommandPalette, setShowCommandPalette] = useState(false);
   const [activeSuggestion, setActiveSuggestion] = useState(-1);
   const [isPending, startTransition] = useTransition();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const commandSuggestions: CommandSuggestion[] = [
     { 
@@ -230,8 +236,8 @@ export default function Chat() {
 
         {/* Chat Messages */}
         {!showWelcome && (
-          <div className="flex-1 min-h-0 pb-24">
-            <ChatMessageList>
+          <div className="flex-1 min-h-0 pb-24 overflow-y-auto">
+            <div className="max-w-4xl mx-auto px-4 py-4 space-y-4">
               {messages.map((message) => (
                 <ChatBubble
                   key={message.id}
@@ -255,7 +261,8 @@ export default function Chat() {
                   <ChatBubbleMessage isLoading />
                 </ChatBubble>
               )}
-            </ChatMessageList>
+              <div ref={messagesEndRef} />
+            </div>
           </div>
         )}
       </div>
